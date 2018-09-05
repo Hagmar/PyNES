@@ -42,3 +42,15 @@ class CPU:
 
     def p_negative(self):
         return self.register_p & self.NEGATIVE
+
+    def set_status(self, bits):
+        if bits & self.ZERO:
+            set_bit(self.ZERO, self.register_a == 0)
+        if bits & self.NEGATIVE:
+            set_bit(self.NEGATIVE, self.register_a & 0x80 == 0x80)
+
+    def set_bit(self, bit, cond):
+        if cond:
+            self.register_p |= bit
+        else:
+            self.register_p &= ~bit
