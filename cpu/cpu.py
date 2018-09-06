@@ -10,6 +10,8 @@ class CPU:
             pass
 
     def __init__(self):
+        self.log = logging.getLogger('PyNES')
+
         self.ZERO = 0x02
         self.NEGATIVE = 0x80
 
