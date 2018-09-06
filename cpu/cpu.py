@@ -5,17 +5,18 @@ import logging
 
 class CPU:
     class Instruction:
-        def __init__(self, function, addressing, param_bytes, cycles):
+        def __init__(self, function, addressing, instr_bytes, cycles):
             self.function = function
             self.addressing = addressing
-            self.param_bytes = param_bytes
+            self.instr_bytes = instr_bytes
             self.cycles = cycles
 
         def __call__(self, cpu):
-            self.function(
-                    cpu,
-                    addressing,
-                    cpu.memory[cpu.pc+1:cpu.pc+1+self.param_bytes])
+            param = 0
+            for i in range(self.instr_bytes - 1):
+                param += cpu.memory[cpu.pc + i + 1] << 8 * i
+
+            self.function(cpu, self.addressing, param)
 
     def __init__(self):
         self.log = logging.getLogger('PyNES')
@@ -34,7 +35,8 @@ class CPU:
         self.memory = [0] * 0xffff
 
         self.opcodes = {
-                0x29: self.Instruction(instr.AND, addr.IMMEDIATE, 1, 2),
+                0x29: self.Instruction(instr.AND, addr.IMMEDIATE, 2, 2),
+                0x69: self.Instruction(instr.ADD, addr.IMMEDIATE, 2, 2)
         }
 
     def p_carry(self):
@@ -43,7 +45,7 @@ class CPU:
     def p_zero(self):
         return self.p & self.ZERO
 
-    def p_interript_disable(self):
+    def p_interrupt_disable(self):
         return self.p & 0x04
 
     def p_decimal(self):
