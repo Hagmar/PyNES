@@ -23,6 +23,8 @@ class CPU:
 
         self.CARRY = 0x01
         self.ZERO = 0x02
+        self.INTERRUPT = 0x02
+        self.DECIMAL = 0x08
         self.OVERFLOW = 0x40
         self.NEGATIVE = 0x80
 
@@ -33,11 +35,15 @@ class CPU:
         self.x = 0
         self.y = 0
 
-        self.memory = [0] * 0xffff
+        self.memory = [0] * 0xFFFF
 
         self.opcodes = {
+                0x18: self.Instruction(instr.CLC, addr.IMPLICIT, 1, 2),
                 0x29: self.Instruction(instr.AND, addr.IMMEDIATE, 2, 2),
-                0x69: self.Instruction(instr.ADC, addr.IMMEDIATE, 2, 2)
+                0x58: self.Instruction(instr.CLI, addr.IMMEDIATE, 1, 2),
+                0x69: self.Instruction(instr.ADC, addr.IMMEDIATE, 2, 2),
+                0xB8: self.Instruction(instr.CLV, addr.IMMEDIATE, 1, 2),
+                0xD8: self.Instruction(instr.CLD, addr.IMPLICIT, 1, 2)
         }
 
     def p_carry(self):
@@ -47,13 +53,13 @@ class CPU:
         return self.p & self.ZERO
 
     def p_interrupt_disable(self):
-        return self.p & 0x04
+        return self.p & self.INTERRUPT
 
     def p_decimal(self):
-        return self.p & 0x08
+        return self.p & self.DECIMAL
 
     def p_overflow(self):
-        return self.p & 0x40
+        return self.p & self.OVERFLOW
 
     def p_negative(self):
         return self.p & self.NEGATIVE
@@ -62,7 +68,7 @@ class CPU:
         if bits & self.ZERO:
             set_bit(self.ZERO, self.a == 0)
         if bits & self.NEGATIVE:
-            set_bit(self.NEGATIVE, self.a & 0x80 == 0x80)
+            set_bit(self.NEGATIVE, self.a & self.NEGATIVE)
 
     def set_bit(self, bit, cond):
         if cond:
