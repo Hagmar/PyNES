@@ -27,3 +27,17 @@ def CLI(cpu, addressing_mode, param):
 
 def CLV(cpu, addressing_mode, param):
     cpu.set_bit(cpu.OVERFLOW, 0)
+
+
+def DEX(cpu, addressing_mode, param):
+    cpu.x -= 1
+    cpu.set_bit(cpu.NEGATIVE, cpu.x & cpu.NEGATIVE)
+    cpu.x &= 0xFF
+    cpu.set_bit(cpu.ZERO, cpu.x == 0)
+
+
+def DEY(cpu, addressing_mode, param):
+    cpu.y -= 1
+    cpu.set_bit(cpu.NEGATIVE, cpu.y & cpu.NEGATIVE)
+    cpu.y &= 0xFF
+    cpu.set_bit(cpu.ZERO, cpu.y == 0)

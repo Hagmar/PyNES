@@ -42,7 +42,9 @@ class CPU:
                 0x29: self.Instruction(instr.AND, addr.IMMEDIATE, 2, 2),
                 0x58: self.Instruction(instr.CLI, addr.IMMEDIATE, 1, 2),
                 0x69: self.Instruction(instr.ADC, addr.IMMEDIATE, 2, 2),
+                0x88: self.Instruction(instr.DEY, addr.IMPLICIT, 1, 2),
                 0xB8: self.Instruction(instr.CLV, addr.IMMEDIATE, 1, 2),
+                0xCA: self.Instruction(instr.DEX, addr.IMPLICIT, 1, 2),
                 0xD8: self.Instruction(instr.CLD, addr.IMPLICIT, 1, 2)
         }
 
