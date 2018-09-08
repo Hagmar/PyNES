@@ -13,6 +13,13 @@ def AND(cpu, addressing_mode, param):
     cpu.set_status(cpu.ZERO & cpu.NEGATIVE, cpu.a)
 
 
+def ASL(cpu, addressing_mode, param):
+    value = addressing_mode.read(cpu, param)
+    cpu.set_bit(cpu.CARRY, value & 0x80)
+    value = (value <<= 1) & 0xFF
+    addressing_mode.write(cpu, param)
+
+
 def CLC(cpu, addressing_mode, param):
     cpu.set_bit(cpu.CARRY, 0)
 
