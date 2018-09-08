@@ -72,11 +72,11 @@ class CPU:
     def p_negative(self):
         return self.p & self.NEGATIVE
 
-    def set_status(self, bits):
+    def set_status(self, bits, value):
         if bits & self.ZERO:
-            set_bit(self.ZERO, self.a == 0)
+            set_bit(self.ZERO, value)
         if bits & self.NEGATIVE:
-            set_bit(self.NEGATIVE, self.a & self.NEGATIVE)
+            set_bit(self.NEGATIVE, value & self.NEGATIVE)
 
     def set_bit(self, bit, cond):
         if cond:
