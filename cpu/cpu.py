@@ -38,19 +38,32 @@ class CPU:
         self.memory = [0] * 0xFFFF
 
         self.opcodes = {
+                0x0A: self.Instruction(instr.ASL, addr.ACCUMULATOR, 1, 2),
+                0x0E: self.Instruction(instr.ASL, addr.ABSOLUTE, 3, 6),
+
                 0x18: self.Instruction(instr.CLC, addr.IMPLICIT, 1, 2),
+                0x1E: self.Instruction(instr.ASL, addr.ABSOLUTE_X, 3, 7),
+
                 0x29: self.Instruction(instr.AND, addr.IMMEDIATE, 2, 2),
                 0x2D: self.Instruction(instr.AND, addr.ABSOLUTE, 3, 4),
+
                 0x39: self.Instruction(instr.AND, addr.ABSOLUTE_Y, 3, 4),
                 0x3D: self.Instruction(instr.AND, addr.ABSOLUTE_X, 3, 4),
+
                 0x58: self.Instruction(instr.CLI, addr.IMMEDIATE, 1, 2),
+
                 0x69: self.Instruction(instr.ADC, addr.IMMEDIATE, 2, 2),
                 0x6D: self.Instruction(instr.ADC, addr.ABSOLUTE, 3, 4),
+
                 0x79: self.Instruction(instr.ADC, addr.ABSOLUTE_Y, 3, 4),
                 0x7D: self.Instruction(instr.ADC, addr.ABSOLUTE_X, 3, 4),
+
                 0x88: self.Instruction(instr.DEY, addr.IMPLICIT, 1, 2),
+
                 0xB8: self.Instruction(instr.CLV, addr.IMMEDIATE, 1, 2),
+
                 0xCA: self.Instruction(instr.DEX, addr.IMPLICIT, 1, 2),
+
                 0xD8: self.Instruction(instr.CLD, addr.IMPLICIT, 1, 2)
         }
 
