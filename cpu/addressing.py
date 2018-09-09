@@ -38,3 +38,27 @@ class IMMEDIATE:
 class IMPLICIT:
     def read(cpu, param):
         return 0
+
+
+class ZERO_PAGE:
+    def read(cpu, param):
+        return cpu.memory[param]
+
+    def write(cpu, param, value):
+        cpu.memory[param] = value
+
+
+class ZERO_PAGE_X:
+    def read(cpu, param):
+        return cpu.memory[(param + cpu.x) & 0xFF]
+
+    def write(cpu, param, value):
+        cpu.memory[(param + cpu.x) & 0xFF] = value
+
+
+class ZERO_PAGE_Y:
+    def read(cpu, param):
+        return cpu.memory[(param + cpu.y) & 0xFF]
+
+    def write(cpu, param, value):
+        cpu.memory[(param + cpu.y) & 0xFF] = value
