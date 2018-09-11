@@ -18,6 +18,16 @@ class CPU:
 
             self.function(cpu, self.addressing, param)
 
+    class Memory:
+        def __init__(self):
+            self.memory = [0] * 0xFFFF
+
+        def read(self, addr):
+            return self.memory[addr]
+
+        def write(self, addr, value):
+            self.memory[addr] = value
+
     def __init__(self):
         self.log = logging.getLogger('PyNES')
 
@@ -35,7 +45,7 @@ class CPU:
         self.x = 0
         self.y = 0
 
-        self.memory = [0] * 0xFFFF
+        self.memory = self.Memory()
 
         self.opcodes = {
                 0x06: self.Instruction(instr.ASL, addr.ZERO_PAGE, 2, 5),
@@ -102,3 +112,9 @@ class CPU:
             self.p |= bit
         else:
             self.p &= ~bit
+
+    def read_mem(self, addr):
+        return self.memory.read(addr)
+
+    def write_mem(self, addr, value):
+        self.memory.write(addr, value)

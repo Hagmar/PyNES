@@ -1,25 +1,25 @@
 class ABSOLUTE:
     def read(cpu, param):
-        return cpu.memory[param]
+        return cpu.memory.read(param)
 
     def write(cpu, param, value):
-        cpu.memory[param] = value
+        cpu.memory.write(param, value)
 
 
 class ABSOLUTE_X:
     def read(cpu, param):
-        return cpu.memory[(param + cpu.x) & 0xFFFF]
+        return cpu.memory.read((param + cpu.x) & 0xFFFF)
 
     def write(cpu, param, value):
-        cpu.memory[(param + cpu.y) & 0xFFFF] = value
+        cpu.memory.write((param + cpu.y) & 0xFFFF, value)
 
 
 class ABSOLUTE_Y:
     def read(cpu, param):
-        return cpu.memory[(param + cpu.y) & 0xFFFF]
+        return cpu.memory.read((param + cpu.y) & 0xFFFF)
 
     def write(cpu, param, value):
-        cpu.memory[(param + cpu.y) & 0xFFFF] = value
+        cpu.memory.write((param + cpu.y) & 0xFFFF, value)
 
 
 class ACCUMULATOR:
@@ -42,23 +42,23 @@ class IMPLICIT:
 
 class ZERO_PAGE:
     def read(cpu, param):
-        return cpu.memory[param]
+        return cpu.memory.read(param)
 
     def write(cpu, param, value):
-        cpu.memory[param] = value
+        cpu.memory.write(param, value)
 
 
 class ZERO_PAGE_X:
     def read(cpu, param):
-        return cpu.memory[(param + cpu.x) & 0xFF]
+        return cpu.memory.read((param + cpu.x) & 0xFF)
 
     def write(cpu, param, value):
-        cpu.memory[(param + cpu.x) & 0xFF] = value
+        cpu.memory.write((param + cpu.x) & 0xFF, value)
 
 
 class ZERO_PAGE_Y:
     def read(cpu, param):
-        return cpu.memory[(param + cpu.y) & 0xFF]
+        return cpu.memory.read((param + cpu.y) & 0xFF)
 
     def write(cpu, param, value):
-        cpu.memory[(param + cpu.y) & 0xFF] = value
+        cpu.memory.write((param + cpu.y) & 0xFF, value)
