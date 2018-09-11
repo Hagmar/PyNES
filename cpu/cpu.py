@@ -73,22 +73,22 @@ class CPU:
                 0xD8: self.Instruction(instr.CLD, addr.IMPLICIT, 1, 2)
         }
 
-    def p_carry(self):
+    def carry(self):
         return self.p & self.CARRY
 
-    def p_zero(self):
+    def zero(self):
         return self.p & self.ZERO
 
-    def p_interrupt_disable(self):
+    def interrupt_disable(self):
         return self.p & self.INTERRUPT
 
-    def p_decimal(self):
+    def decimal(self):
         return self.p & self.DECIMAL
 
-    def p_overflow(self):
+    def overflow(self):
         return self.p & self.OVERFLOW
 
-    def p_negative(self):
+    def negative(self):
         return self.p & self.NEGATIVE
 
     def set_status(self, bits, value):
