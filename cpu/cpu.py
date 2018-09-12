@@ -33,7 +33,7 @@ class CPU:
 
         self.CARRY = 0x01
         self.ZERO = 0x02
-        self.INTERRUPT = 0x02
+        self.INTERRUPT = 0x04
         self.DECIMAL = 0x08
         self.OVERFLOW = 0x40
         self.NEGATIVE = 0x80
