@@ -22,11 +22,16 @@ class CPU:
         def __init__(self):
             self.memory = [0] * 0xFFFF
 
+        def calculate_addr(self, addr):
+            if 0x2000 <= addr <= 0x3FFF:
+                return (addr % 0x0007) + 0x2000
+            return addr
+
         def read(self, addr):
-            return self.memory[addr]
+            return self.memory[self.calculate_addr(addr)]
 
         def write(self, addr, value):
-            self.memory[addr] = value
+            self.memory[self.calculate_addr(addr)] = value
 
     def __init__(self):
         self.log = logging.getLogger('PyNES')
