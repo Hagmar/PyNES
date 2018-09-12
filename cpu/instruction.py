@@ -1,3 +1,7 @@
+def signed(value):
+    return value - 0xFF if value > 0x7F else value
+
+
 def ADC(cpu, addressing_mode, param):
     operand = addressing_mode.read(cpu, param)
     cpu.a += operand
@@ -16,8 +20,14 @@ def AND(cpu, addressing_mode, param):
 def ASL(cpu, addressing_mode, param):
     value = addressing_mode.read(cpu, param)
     cpu.set_bit(cpu.CARRY, value & 0x80)
-    value = (value <<= 1) & 0xFF
+    value = (value << 1) & 0xFF
     addressing_mode.write(cpu, param)
+
+
+def BCC(cpu, addressing_mode, param):
+    if not cpu.carry():
+        branch(cpu, param)
+        cpu.pc = (cpu.pc + param) & 0xFFFF
 
 
 def CLC(cpu, addressing_mode, param):
@@ -47,3 +57,6 @@ def DEY(cpu, addressing_mode, param):
     cpu.set_bit(cpu.NEGATIVE, cpu.y & cpu.NEGATIVE)
     cpu.y &= 0xFF
     cpu.set_bit(cpu.ZERO, cpu.y == 0)
+
+def branch(cpu, relative_addr):
+    cpu.pc = (cpu.pc + signed(relative_addr)) & 0xFFFF
