@@ -23,6 +23,8 @@ class CPU:
             self.memory = [0] * 0xFFFF
 
         def calculate_addr(self, addr):
+            addr &= 0xFFFF
+
             if 0x2000 <= addr <= 0x3FFF:
                 return (addr % 0x0007) + 0x2000
             return addr
