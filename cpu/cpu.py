@@ -90,10 +90,13 @@ class CPU:
                 0xB0: self.Instruction(instr.BCS, addr.RELATIVE, 2, 2),
                 0xB8: self.Instruction(instr.CLV, addr.IMMEDIATE, 1, 2),
 
+                0xC8: self.Instruction(instr.INY, addr.IMPLICIT, 1, 2),
                 0xCA: self.Instruction(instr.DEX, addr.IMPLICIT, 1, 2),
 
                 0xD0: self.Instruction(instr.BNE, addr.RELATIVE, 2, 2),
                 0xD8: self.Instruction(instr.CLD, addr.IMPLICIT, 1, 2),
+
+                0xE8: self.Instruction(instr.INX, addr.IMPLICIT, 1, 2),
 
                 0xF0: self.Instruction(instr.BEQ, addr.RELATIVE, 2, 2)
         }

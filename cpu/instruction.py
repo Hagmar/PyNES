@@ -92,5 +92,16 @@ def DEY(cpu, addressing_mode, param):
     cpu.y &= 0xFF
     cpu.set_bit(cpu.ZERO, cpu.y == 0)
 
+
+def INX(cpu, addressing_mode, param):
+    cpu.x = (cpu.x + 1) & 0xFF
+    cpu.set_status(cpu.ZERO & cpu.NEGATIVE, cpu.x)
+
+
+def INY(cpu, addressing_mode, param):
+    cpu.y = (cpu.y + 1) & 0xFF
+    cpu.set_status(cpu.ZERO & cpu.NEGATIVE, cpu.y)
+
+
 def branch(cpu, relative_addr):
     cpu.pc = (cpu.pc + signed(relative_addr)) & 0xFFFF
