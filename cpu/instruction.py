@@ -27,7 +27,41 @@ def ASL(cpu, addressing_mode, param):
 def BCC(cpu, addressing_mode, param):
     if not cpu.carry():
         branch(cpu, param)
-        cpu.pc = (cpu.pc + param) & 0xFFFF
+
+
+def BCS(cpu, addressing_mode, param):
+    if cpu.carry():
+        branch(cpu, param)
+
+
+def BEQ(cpu, addressing_mode, param):
+    if cpu.zero():
+        branch(cpu, param)
+
+
+def BMI(cpu, addressing_mode, param):
+    if cpu.negative():
+        branch(cpu, param)
+
+
+def BNE(cpu, addressing_mode, param):
+    if not cpu.zero():
+        branch(cpu, param)
+
+
+def BPL(cpu, addressing_mode, param):
+    if not cpu.negative():
+        branch(cpu, param)
+
+
+def BVC(cpu, addressing_mode, param):
+    if not cpu.overflow():
+        branch(cpu, param)
+
+
+def BVS(cpu, addressing_mode, param):
+    if cpu.overflow():
+        branch(cpu, param)
 
 
 def CLC(cpu, addressing_mode, param):

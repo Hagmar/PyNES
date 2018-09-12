@@ -57,6 +57,7 @@ class CPU:
                 0x0A: self.Instruction(instr.ASL, addr.ACCUMULATOR, 1, 2),
                 0x0E: self.Instruction(instr.ASL, addr.ABSOLUTE, 3, 6),
 
+                0x10: self.Instruction(instr.BPL, addr.RELATIVE, 2, 2),
                 0x16: self.Instruction(instr.ASL, addr.ZERO_PAGE_X, 2, 6),
                 0x18: self.Instruction(instr.CLC, addr.IMPLICIT, 1, 2),
                 0x1E: self.Instruction(instr.ASL, addr.ABSOLUTE_X, 3, 7),
@@ -65,27 +66,36 @@ class CPU:
                 0x29: self.Instruction(instr.AND, addr.IMMEDIATE, 2, 2),
                 0x2D: self.Instruction(instr.AND, addr.ABSOLUTE, 3, 4),
 
+                0x30: self.Instruction(instr.BMI, addr.RELATIVE, 2, 2),
                 0x35: self.Instruction(instr.AND, addr.ZERO_PAGE_X, 2, 4),
                 0x39: self.Instruction(instr.AND, addr.ABSOLUTE_Y, 3, 4),
                 0x3D: self.Instruction(instr.AND, addr.ABSOLUTE_X, 3, 4),
 
+                0x50: self.Instruction(instr.BVC, addr.RELATIVE, 2, 2),
                 0x58: self.Instruction(instr.CLI, addr.IMMEDIATE, 1, 2),
 
                 0x65: self.Instruction(instr.ADC, addr.ZERO_PAGE, 2, 3),
                 0x69: self.Instruction(instr.ADC, addr.IMMEDIATE, 2, 2),
                 0x6D: self.Instruction(instr.ADC, addr.ABSOLUTE, 3, 4),
 
+                0x70: self.Instruction(instr.BVS, addr.RELATIVE, 2, 2),
                 0x75: self.Instruction(instr.ADC, addr.ZERO_PAGE_X, 2, 4),
                 0x79: self.Instruction(instr.ADC, addr.ABSOLUTE_Y, 3, 4),
                 0x7D: self.Instruction(instr.ADC, addr.ABSOLUTE_X, 3, 4),
 
                 0x88: self.Instruction(instr.DEY, addr.IMPLICIT, 1, 2),
 
+                0x90: self.Instruction(instr.BCC, addr.RELATIVE, 2, 2),
+
+                0xB0: self.Instruction(instr.BCS, addr.RELATIVE, 2, 2),
                 0xB8: self.Instruction(instr.CLV, addr.IMMEDIATE, 1, 2),
 
                 0xCA: self.Instruction(instr.DEX, addr.IMPLICIT, 1, 2),
 
-                0xD8: self.Instruction(instr.CLD, addr.IMPLICIT, 1, 2)
+                0xD0: self.Instruction(instr.BNE, addr.RELATIVE, 2, 2),
+                0xD8: self.Instruction(instr.CLD, addr.IMPLICIT, 1, 2),
+
+                0xF0: self.Instruction(instr.BEQ, addr.RELATIVE, 2, 2)
         }
 
     def carry(self):
