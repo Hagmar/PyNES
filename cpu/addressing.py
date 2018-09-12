@@ -40,6 +40,14 @@ class IMPLICIT:
         return 0
 
 
+class RELATIVE:
+    def read(cpu, param):
+        pass
+
+    def write(cpu, param, value):
+        pass
+
+
 class ZERO_PAGE:
     def read(cpu, param):
         return cpu.memory.read(param)
